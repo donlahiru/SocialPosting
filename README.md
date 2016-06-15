@@ -1,29 +1,56 @@
-# Social Posting Application
-
-SocialPoster is an application that lets users schedule and post to Social Media. 
-
-This taks requires the Developer to build a foundation application that will do the following :
-
-1. Create Text Only Social Post
-2. Post to multiple Social Networks at once.
-
-The user is free to choose any Social network they prefer. Credentials are to be stored in a configuraiton file. The application doesn't have to have a pretty UI.
-
-You are allowed to use 3rd party packages with composer , but refrain from using a complete framework. 
-
-Also add a Instructions.md file that explains your file structure and design considerations architectural decisions made. 
-
-Key objectives :
-
-1. How well the code is organised. 
-2. Ensure that the once can easily add support to additional 3rd party integrations with ease.
-3. Make it a composer Package (additional) 
+# Social Media Post 
 
 
-Hints :
+first to run this program you have to set social media configeration in config.ini file
+```
+;facebook credentials
+[Facebook:FacebookPost]
+appId = "xxxxx"
+secret = "xxxxx"
+accessToken = "xxxxx"
 
-1. Use of basic OOP Practices
-2. Documentation / Comments
-3. PSR complience
+;twitter credentials
+[Twitter:TwitterPost]
+oauth_access_token = "xxxxx"
+oauth_access_token_secret = "xxxxx"
+consumer_key = "xxxxx"
+consumer_secret = "xxxxx"
+url_postStatusUpdate = "https://api.twitter.com/1.1/statuses/update.json"
 
-Once done , submit a pull request and drop an email to jobs@riverviewms.com
+```
+enter relavent configeration in marked as 'xxxxx'
+
+If you want to add new social media to post status there are simple step to do with out changing the code
+
+first you have to add credentials to config.ini like mention in above
+as a exmaple google+
+
+```
+[google+:GooglePost]
+.....
+...
+...
+```
+google+ is the name that appear in the program that user to check to post for that social media.
+when you add config like above in config.ini file it will automatically appear in the program nothing to change the code.
+
+GooglePost is the class name.
+you have to add class file in class folder and add send method like below
+
+```
+class GooglePost
+{
+  private $conf_array;
+	
+	public function __construct($conf_array) {
+        $this->conf_array = $conf_array;
+  }
+  
+  public function send($message)
+  {
+  ....
+  ....
+  }
+  
+}
+```
